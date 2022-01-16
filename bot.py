@@ -6,7 +6,8 @@ import os
 from pyrogram import Client, filters
 from helpers import copy_msg, force_sub
 
-
+FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
+CHANNEL_LINK = os.environ.get("CHANNEL_LINK")
 
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
@@ -18,8 +19,6 @@ Bot = Client(session_name="forwardfsub",
 async def start(bot, message):
     await message.reply(f"<b>Hello {message.from_user.mention}</b>")
 
-
-
 @Bot.on_message(filters.group)
 async def group(bot, message):
     try:
@@ -30,6 +29,27 @@ async def group(bot, message):
            return
     except Exception as e:
        print(e)
-       
+ 
+@Bot.on_callback_query(filters.regex("checksub"))  
+async def checksub(bot, update):
+    try:
+       user=update.message.reply_to_message.from_user.id
+    except:
+       user=update.from_user.id
+    if update.from_user.id==user:
+       try:
+          member = await bot.get_chat_member(FSUB_CHANNEL, user)          
+       except UserNotParticipant:
+          await update.answer("Aysheri 😏\nJoin in channel!", show_alert=True)
+       except Exception as e:
+            print(e)
+       else:
+           await bot.restrict_chat_member(chat_id=msg.chat.id, 
+                                          user_id=msg.from_user.id,
+                                          permissions=ChatPermissions(can_send_messages=True)
+                                          )
+           await update.message.edit(f"Hello {update.from_user.mention}!\nWelcome to {update.message.chat.title}")
+    else:
+       await update.answer("Wew 😳", show_alert=True)
     
-    
+Bot.run()
