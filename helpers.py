@@ -42,7 +42,8 @@ async def force_sub(bot, msg):
                                            permissions=ChatPermissions(can_send_messages=False)
                                            )
             await msg.reply(f"Hello {msg.from_user.mention}!\n\nYou have to join in our channel to message here", 
-                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Channel", url=CHANNEL_LINK)]])
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔥 Join Channel 🔥", url=CHANNEL_LINK)],
+                                                               [InlineKeyboardButton("♻️ Try Again ♻️", callback_data="checksub")]])
                             )
        except Exception as e:
             print(e)
