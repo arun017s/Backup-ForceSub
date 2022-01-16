@@ -47,7 +47,10 @@ async def checksub(bot, update):
        else:
            await bot.restrict_chat_member(chat_id=update.message.chat.id, 
                                           user_id=user,
-                                          permissions=ChatPermissions(can_send_messages=True)
+                                          permissions=ChatPermissions(can_send_messages=True,
+                                                                      can_send_media_messages=True,
+                                                                      can_send_other_messages=True
+                                                                      )
                                           )
            await update.message.edit(f"Hello {update.from_user.mention}!\nWelcome to {update.message.chat.title}")
     else:
