@@ -7,7 +7,6 @@ from pyrogram import Client, filters
 from helpers import copy_msg, force_sub
 
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
-CHANNEL_LINK = os.environ.get("CHANNEL_LINK")
 
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
