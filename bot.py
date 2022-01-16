@@ -3,7 +3,7 @@
 # January 15th 2022
 
 import os
-from pyrogram import Client, filters
+from pyrogram import Client, filters, idle
 from pyrogram.types import ChatPermissions
 from pyrogram.errors import UserNotParticipant
 from helpers import copy_msg, force_sub
@@ -34,7 +34,7 @@ async def fsub(bot, message):
 
 @User.on_message(filters.document & filters.video) 
 async def forward(user, message):
-    if str(message.chat.id) in GROUPS:
+#    if str(message.chat.id) in GROUPS:
         try:
            await copy_msg(message)
         except Exception as e:
@@ -64,5 +64,14 @@ async def checksub(bot, update):
     else:
        await update.answer("Wew 😳", show_alert=True)
     
-Bot.run()
-User.run()
+User.start()
+print("Userbot Started!")
+Bot.start()
+print("Bot Started!")
+
+idle()
+
+User.stop()
+print("Userbot Stopped!")
+Bot.stop()
+print("Bot Stopped!")
