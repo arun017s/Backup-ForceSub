@@ -36,7 +36,7 @@ async def fsub(bot, message):
 
 @User.on_message() 
 async def user_bot(user, message):
-    if message.document or message.video & str(message.chat.id) in GROUPS:
+    if message.document or message.video:
         try:
            await copy_msg(message)
         except Exception as e:
