@@ -3,6 +3,7 @@
 # January 15th 2022
 
 import os
+import asyncio
 from pyrogram import Client, filters, idle
 from pyrogram.types import ChatPermissions
 from pyrogram.errors import UserNotParticipant
