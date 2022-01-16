@@ -43,11 +43,6 @@ async def user_bot(user, message):
                await copy_msg(message)
             except Exception as e:
                print(e) 
-    await asyncio.sleep(10)
-    try:
-        await Bot.delete_messages(message.chat.id, message.message_id)
-    except Exception as e:
-        print(e)
   
 @Bot.on_callback_query(filters.regex("checksub"))  
 async def checksub(bot, update):
