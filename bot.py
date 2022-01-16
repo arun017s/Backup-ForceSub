@@ -10,7 +10,7 @@ from helpers import copy_msg, force_sub
 
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
 SESSION = os.environ.get("SESSION")
-GROUPS = [int(i) for i in os.environ.get("GROUPS")]
+GROUPS = [int(i) for i in int(os.environ.get("GROUPS"))]
 
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
