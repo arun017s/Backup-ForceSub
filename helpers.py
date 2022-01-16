@@ -20,10 +20,10 @@ async def copy_msg(msg):
        return
     else:
        try:
-           await msg.copy(CHANNEL)
+           await msg.copy(DB_CHANNEL)
        except FloodWait as e:
            await asyncio.sleep(e.x)
-           await msg.copy(CHANNEL)
+           await msg.copy(DB_CHANNEL)
            
 
 async def force_sub(bot, msg):
