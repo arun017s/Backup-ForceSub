@@ -4,6 +4,7 @@
 
 import os
 from pyrogram import Client, filters
+from pyrogram.errors import UserNotParticipant
 from helpers import copy_msg, force_sub
 
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
