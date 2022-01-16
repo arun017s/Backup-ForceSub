@@ -27,9 +27,6 @@ async def copy_msg(msg):
            
 
 async def force_sub(bot, msg):
-    if msg.from_user.is_bot:
-       return
-    else:
        try:
           member = await bot.get_chat_member(FSUB_CHANNEL, msg.from_user.id)
           if member.status == "banned":
