@@ -10,9 +10,7 @@ from helpers import copy_msg, force_sub
 
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
 SESSION = os.environ.get("SESSION")
-
-for group in os.environ.get("GROUPS").split():
-    GROUPS = int(group)
+GROUPS = os.environ.get("GROUPS").split()
 
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
@@ -34,16 +32,14 @@ async def fsub(bot, message):
     except Exception as e:
        print(e)
 
-@User.on_message(filters.chat(GROUPS)) 
+@User.on_message(filters.document & filters.video) 
 async def forward(user, message):
-    try:
-       if message.document or message.video:
+    if str(message.chat.id) in GROUPS:
+        try:
            await copy_msg(message)
-       else:
-           return
-    except Exception as e:
-       print(e) 
-
+        except Exception as e:
+           print(e) 
+  
 @Bot.on_callback_query(filters.regex("checksub"))  
 async def checksub(bot, update):
     try:
@@ -62,8 +58,7 @@ async def checksub(bot, update):
                                           user_id=user,
                                           permissions=ChatPermissions(can_send_messages=True,
                                                                       can_send_media_messages=True,
-                                                                      can_send_other_messages=True
-                                                                      )
+                                                                      can_send_other_messages=True)
                                           )
            await update.message.edit(f"Hello {update.from_user.mention}!\nWelcome to {update.message.chat.title}")
     else:
