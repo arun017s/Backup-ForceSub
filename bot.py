@@ -9,28 +9,41 @@ from pyrogram.errors import UserNotParticipant
 from helpers import copy_msg, force_sub
 
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
+SESSION = os.environ.get("SESSION")
+
+for group in os.environ.get("GROUPS").split():
+    GROUPS = int(group)
 
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
              api_hash=os.environ.get("API_HASH"),
              bot_token=os.environ.get("BOT_TOKEN"))
-
+# 🥲
+User = Client(session_name=SESSION,
+              api_id=int(os.environ.get("API_ID")),
+              api_hash=os.environ.get("API_HASH"))
 
 @Bot.on_message(filters.private & filters.command("start"))
 async def start(bot, message):
     await message.reply(f"<b>Hello {message.from_user.mention}</b>")
 
 @Bot.on_message(filters.group)
-async def group(bot, message):
+async def fsub(bot, message):
     try:
-       await force_sub(bot, message)
+       await force_sub(bot, message)       
+    except Exception as e:
+       print(e)
+
+@User.on_message(filters.chat(GROUPS)) 
+async def forward(user, message):
+    try:
        if message.document or message.video:
            await copy_msg(message)
        else:
            return
     except Exception as e:
-       print(e)
- 
+       print(e) 
+
 @Bot.on_callback_query(filters.regex("checksub"))  
 async def checksub(bot, update):
     try:
@@ -57,3 +70,4 @@ async def checksub(bot, update):
        await update.answer("Wew 😳", show_alert=True)
     
 Bot.run()
+User.run()
