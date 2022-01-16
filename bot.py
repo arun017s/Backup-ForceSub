@@ -15,11 +15,13 @@ GROUPS = os.environ.get("GROUPS").split()
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
              api_hash=os.environ.get("API_HASH"),
-             bot_token=os.environ.get("BOT_TOKEN"))
+             bot_token=os.environ.get("BOT_TOKEN"),
+             workers=300)
 # 🥲
 User = Client(session_name=SESSION,
               api_id=int(os.environ.get("API_ID")),
-              api_hash=os.environ.get("API_HASH"))
+              api_hash=os.environ.get("API_HASH"),
+              workers=300)
 
 @Bot.on_message(filters.private & filters.command("start"))
 async def start(bot, message):
