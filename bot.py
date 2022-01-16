@@ -4,11 +4,11 @@
 
 import os
 from pyrogram import Client, filters
-from helpers import copy_msg
+from helpers import copy_msg, force_sub
 
 
 
-Bot = Client(session_name="forward+fsub",
+Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
              api_hash=os.environ.get("API_HASH"),
              bot_token=os.environ.get("BOT_TOKEN"))
@@ -22,10 +22,14 @@ async def start(bot, message):
 
 @Bot.on_message(filters.group)
 async def group(bot, message):
-    if message.document or message.video:
-       await copy_msg(message)
-    else:
-       return
+    try:
+       await force_sub(bot, message)
+       if message.document or message.video:
+           await copy_msg(message)
+       else:
+           return
+    except Exception as e:
+       print(e)
        
     
     
