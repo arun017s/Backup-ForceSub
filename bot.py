@@ -10,7 +10,7 @@ from helpers import copy_msg, force_sub
 
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
 SESSION = os.environ.get("SESSION")
-GROUPS = [int(i) for i in int(os.environ.get("GROUPS"))]
+GROUPS = os.environ.get("GROUPS").split()
 
 Bot = Client(session_name="forwardfsub",
              api_id=int(os.environ.get("API_ID")),
@@ -37,7 +37,7 @@ async def fsub(bot, message):
 @User.on_message() 
 async def user_bot(user, message):
     if message.document or message.video:
-        if message.chat.id in GROUPS:
+        if str(message.chat.id) in GROUPS:
             try:
                await copy_msg(message)
             except Exception as e:
