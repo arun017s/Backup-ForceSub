@@ -5,7 +5,7 @@
 import os
 import asyncio
 from pyrogram.errors import FloodWait, UserNotParticipant
-from pyrogram.types import ChatPermissions
+from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
 
 DB_CHANNEL = int(os.environ.get("DB_CHANNEL"))
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
