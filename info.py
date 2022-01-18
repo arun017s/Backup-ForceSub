@@ -1,8 +1,8 @@
 import os
 
-api_id=int(os.environ.get("API_ID")),
-api_hash=os.environ.get("API_HASH"),
-bot_token=os.environ.get("BOT_TOKEN")
+API_ID=int(os.environ.get("API_ID")),
+API_HASH=os.environ.get("API_HASH"),
+BOT_TOKEN=os.environ.get("BOT_TOKEN")
 SESSION=os.environ.get("SESSION")
 
 AUTO_DELETE = os.environ.get("AUTO_DELETE")
