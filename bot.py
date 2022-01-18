@@ -33,7 +33,7 @@ async def fsub(bot, message):
 async def user_bot(user, message):
     if message.document or message.video:      
         try:
-           await copy_msg(Bot, message)
+           await copy_msg(message)
         except Exception as e:
            print(e) 
     if AUTO_DELETE == "True":
