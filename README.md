@@ -13,8 +13,8 @@ Automatically Forward files from groups to channel & Do force sub on members
 9. `CHANNEL_LINK` : Invite link of the ForceSub Channel
 
 ### Make sure:
-- Bot is admin in Groups, Backup Channel & ForceSub Channel
-- Account used to create SESSION is member in group
+- Bot is admin in Groups & ForceSub Channel
+- Account used to create SESSION is member in Groups & admin in Backup Channel
 
 ## Deploy in Heroku
  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
