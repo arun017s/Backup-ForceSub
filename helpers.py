@@ -7,7 +7,7 @@ from info import DB_CHANNEL, FSUB_CHANNEL, CHANNEL_LINK, LIST
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
 
-async def copy_msg(user, msg):
+async def copy_msg(msg):
     file = msg.document or msg.video
     name = file.file_name.split(".")[-1]
     if name in LIST: 
