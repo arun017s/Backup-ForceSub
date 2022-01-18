@@ -4,12 +4,19 @@
 
 from pyrogram import Client, filters, idle
 from helpers import copy_msg, force_sub, check_fsub, auto_delete
-from info import api_id, api_hash, bot_token, SESSION, GROUPS, AUTO_DELETE
+from info import API_ID, API_HASH, BOT_TOKEN, SESSION, GROUPS, AUTO_DELETE
 
-Bot = Client("forwardfsub", api_id, api_hash, bot_token, workers=300)
+Bot = Client(session_name="backup-fsub", 
+             api_id=API_ID,
+             api_hash=API_HASH,
+             bot_token=BOT_TOKEN,
+             workers=300)
 # 🥲
-User = Client(SESSION, api_id, api_hash, workers=300)
-
+User = Client(session_name=SESSION, 
+              api_id=API_ID,
+              api_hash=API_HASH,
+              workers=300)
+ 
 @Bot.on_message(filters.private & filters.command("start"))
 async def start(bot, message):
     await message.reply(f"<b>Hello {message.from_user.mention}!\nI will forward all files from your groups to backup channel\nAlso you can use me as a ForceSubscribe Bot!\n\nYou can make your own bot from this [SOURCE CODE](https://github.com/Arun-TG/Forward-Fsub)</b>",
