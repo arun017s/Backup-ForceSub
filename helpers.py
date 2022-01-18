@@ -2,7 +2,6 @@
 
 # January 15th 2022
 
-import os
 import asyncio
 from info import DB_CHANNEL, FSUB_CHANNEL, CHANNEL_LINK, LIST
 from pyrogram.errors import FloodWait, UserNotParticipant
