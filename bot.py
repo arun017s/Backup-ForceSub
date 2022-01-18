@@ -2,29 +2,16 @@
 
 # January 15th 2022
 
-import os
 from pyrogram import Client, filters, idle
+from info import *
 from helpers import copy_msg, force_sub, check_fsub, auto_delete
-
-FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
-SESSION = os.environ.get("SESSION")
-GROUPS = []
-for grp in (os.environ.get("GROUPS").split()):
-       ADMINS.append(int(grp))
-
-AUTO_DELETE = os.environ.get("AUTO_DELETE")
 
 
 Bot = Client(session_name="forwardfsub",
-             api_id=int(os.environ.get("API_ID")),
-             api_hash=os.environ.get("API_HASH"),
-             bot_token=os.environ.get("BOT_TOKEN"),
-             workers=300)
+             api_id, api_hash, bot_token, workers=300)
 # 🥲
 User = Client(session_name=SESSION,
-              api_id=int(os.environ.get("API_ID")),
-              api_hash=os.environ.get("API_HASH"),
-              workers=300)
+              api_id, api_hash, workers=300)
 
 @Bot.on_message(filters.private & filters.command("start"))
 async def start(bot, message):
