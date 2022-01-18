@@ -3,9 +3,8 @@
 # January 15th 2022
 
 from pyrogram import Client, filters, idle
-from info import *
 from helpers import copy_msg, force_sub, check_fsub, auto_delete
-
+from info import api_id, api_hash, bot_token, SESSION, GROUPS, AUTO_DELETE
 
 Bot = Client(session_name="forwardfsub",
              api_id, api_hash, bot_token, workers=300)
