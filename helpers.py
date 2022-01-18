@@ -14,11 +14,13 @@ async def copy_msg(Bot, msg):
        return
     else:
        try:
-           await Bot.copy_message(DB_CHANNEL, msg.chat.id, msg.message_id)           
+           message = await Bot.get_messages(msg.chat.id, msg.message_id)
+           await message.copy(DB_CHANNEL)
        except FloodWait as e:
            await asyncio.sleep(e.x)
-           await Bot.copy_message(DB_CHANNEL, msg.chat.id, msg.message_id)           
-           
+           message = await Bot.get_messages(msg.chat.id, msg.message_id)
+           await message.copy(DB_CHANNEL)
+
 async def force_sub(bot, msg):
        try:
           member = await bot.get_chat_member(FSUB_CHANNEL, msg.from_user.id)
