@@ -18,7 +18,6 @@ Automatically Forward files from groups to channel & Do force sub on members
 
 ## Deploy in Heroku
  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-- DON'T FORGET TO TURN ON DYNOS IN HEROKU
 
 ## Deploy in your VPS
 
