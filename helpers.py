@@ -7,19 +7,17 @@ from info import DB_CHANNEL, FSUB_CHANNEL, CHANNEL_LINK, LIST
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
 
-async def copy_msg(Bot, msg):
+async def copy_msg(user, msg):
     file = msg.document or msg.video
     name = file.file_name.split(".")[-1]
     if name in LIST: 
        return
     else:
        try:
-           message = await Bot.get_messages(msg.chat.id, msg.message_id)
-           await message.copy(DB_CHANNEL)
+           await msg.copy(DB_CHANNEL)
        except FloodWait as e:
            await asyncio.sleep(e.x)
-           message = await Bot.get_messages(msg.chat.id, msg.message_id)
-           await message.copy(DB_CHANNEL)
+           await msg.copy(DB_CHANNEL)
 
 async def force_sub(bot, msg):
        try:
