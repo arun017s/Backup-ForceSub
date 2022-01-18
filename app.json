@@ -1,0 +1,61 @@
+{
+  "name": "Backup & ForceSub Bot",
+  "description": "A bot that can be used to create a backup for groups & do force sub on members",
+  "keywords": [
+    "telegram",
+    "backup",
+    "fsub"
+  ],
+  "repository": "https://github.com/Arun-TG/Backup-ForceSub",
+  "logo": "https://te.legra.ph/file/afefb63eabdc03e984041.jpg",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Get it from @Botfather",
+      "value": ""
+    },
+    "API_ID": {
+      "description": "Your telegram API ID, Get it from my.telegram.org",
+      "value": ""
+    },
+    "API_HASH":{
+      "description": "Your telegram API HASH, Get it from my.telegram.org",
+      "value": ""
+    },
+    "SESSION":{
+      "description": "Pyrogram session generated from the link in Readme",
+      "value": ""
+    },
+    "AUTO_DELETE":{
+      "description": "Give True or False",
+      "value": "False"
+    },
+    "GROUPS":{
+      "description": "ID of the groups where the bot work (seperate by spaces)",
+      "value": ""
+    },
+    "DB_CHANNEL": {
+      "description": "ID of backup channel",
+      "value": ""
+    },
+    "FSUB_CHANNEL": {
+      "description": "ID of Force Sub Channel",
+      "value": ""
+    },
+    "CHANNEL_LINK": {
+      "description": "Invite link of Force Sub Channel",
+      "value": ""
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
+
