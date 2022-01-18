@@ -4,15 +4,9 @@
 
 import os
 import asyncio
+from info import DB_CHANNEL, FSUB_CHANNEL, CHANNEL_LINK, LIST
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
-
-DB_CHANNEL = int(os.environ.get("DB_CHANNEL"))
-FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
-CHANNEL_LINK = os.environ.get("CHANNEL_LINK")
-
-# remove or add more as per your need
-LIST = ["srt", "txt", "jpg", "jpeg", "png", "torrent", "html", "aio", "pdf", "zip"] 
 
 async def copy_msg(Bot, msg):
     file = msg.document or msg.video
@@ -76,6 +70,4 @@ async def check_fsub(bot, update):
     else:
        await update.answer("That's not for you bruh 😂", show_alert=True)
  
-
-
 # Kangers stay away 😒
