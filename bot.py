@@ -6,11 +6,9 @@ from pyrogram import Client, filters, idle
 from helpers import copy_msg, force_sub, check_fsub, auto_delete
 from info import api_id, api_hash, bot_token, SESSION, GROUPS, AUTO_DELETE
 
-Bot = Client(session_name="forwardfsub",
-             api_id, api_hash, bot_token, workers=300)
+Bot = Client("forwardfsub", api_id, api_hash, bot_token, workers=300)
 # 🥲
-User = Client(session_name=SESSION,
-              api_id, api_hash, workers=300)
+User = Client(SESSION, api_id, api_hash, workers=300)
 
 @Bot.on_message(filters.private & filters.command("start"))
 async def start(bot, message):
