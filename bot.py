@@ -22,7 +22,7 @@ async def start(bot, message):
     await message.reply(f"<b>Hello {message.from_user.mention}!\nI will forward all files from your groups to backup channel\nAlso you can use me as a ForceSubscribe Bot!\n\nYou can make your own bot from this [SOURCE CODE](https://github.com/Arun-TG/Backup-ForceSub)</b>",
                         disable_web_page_preview=True)
 
-@Bot.on_message(filters.chat(GROUPS) & ~filters.edited)
+@Bot.on_message(filters.chat(GROUPS))
 async def fsub(bot, message):
     try:
        await force_sub(bot, message)       
