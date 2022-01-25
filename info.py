@@ -6,9 +6,7 @@ BOT_TOKEN=os.environ.get("BOT_TOKEN")
 SESSION=os.environ.get("SESSION")
 
 AUTO_DELETE = os.environ.get("AUTO_DELETE")
-GROUPS = []
-for grp in (os.environ.get("GROUPS").split()):
-    GROUPS.append(int(grp))
+GROUPS = os.environ.get("GROUPS").split()
 DB_CHANNEL = int(os.environ.get("DB_CHANNEL"))
 FSUB_CHANNEL = int(os.environ.get("FSUB_CHANNEL"))
 CHANNEL_LINK = os.environ.get("CHANNEL_LINK")
