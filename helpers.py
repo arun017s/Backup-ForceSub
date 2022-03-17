@@ -9,8 +9,7 @@ from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboard
 
 async def copy_msg(msg):
     file = msg.document or msg.video
-    name = file.file_name.split(".")[-1]
-    if name in LIST: 
+    if file.file_name.split(".")[-1] in LIST: 
        return
     else:
        try:
@@ -19,24 +18,26 @@ async def copy_msg(msg):
            await asyncio.sleep(e.x)
            await msg.copy(DB_CHANNEL)
 
-async def force_sub(bot, msg):
-       try:
-          member = await bot.get_chat_member(FSUB_CHANNEL, msg.from_user.id)
-          if member.status == "banned":
-            await msg.reply(f"Sorry {msg.from_user.mention}!\n You are banned in our channel, you will be banned from here within 10 seconds")
-            await asyncio.sleep(10)
-            await bot.ban_chat_member(msg.chat.id, msg.from_user.id)
-       except UserNotParticipant:
-            await bot.restrict_chat_member(chat_id=msg.chat.id, 
-                                           user_id=msg.from_user.id,
-                                           permissions=ChatPermissions(can_send_messages=False)
-                                           )
-            await msg.reply(f"Hello {msg.from_user.mention}!\n\nYou have to join in our channel to message here", 
-                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔥 Join Channel 🔥", url=CHANNEL_LINK)],
-                                                               [InlineKeyboardButton("♻️ Try Again ♻️", callback_data="checksub")]])
-                            )
-       except Exception as e:
-            print(e)
+async def force_sub(bot, msg):     
+    if msg.from_user is None:
+       return   
+    try:
+       member = await bot.get_chat_member(FSUB_CHANNEL, msg.from_user.id)
+       if member.status == "banned":
+          await msg.reply(f"Sorry {msg.from_user.mention}!\n You are banned in our channel, you will be banned from here within 10 seconds")
+          await asyncio.sleep(10)
+          await bot.ban_chat_member(msg.chat.id, msg.from_user.id)
+    except UserNotParticipant:
+       await bot.restrict_chat_member(chat_id=msg.chat.id, 
+                                      user_id=msg.from_user.id,
+                                      permissions=ChatPermissions(can_send_messages=False)
+                                      )
+       await msg.reply(f"Hello {msg.from_user.mention}!\n\nYou have to join in our channel to message here", 
+                       reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔥 Join Channel 🔥", url=CHANNEL_LINK)],
+                                                          [InlineKeyboardButton("♻️ Try Again ♻️", callback_data=f"checksub_{msg.from_user.id}")]])
+                       )
+    except Exception as e:
+       print(e)
 
 async def auto_delete(Bot, msg):
     chat, msg_id = msg.chat.id, msg.message_id
@@ -47,15 +48,12 @@ async def auto_delete(Bot, msg):
        print(e)
 
 async def check_fsub(bot, update):
-    try:
-       user=update.message.reply_to_message.from_user.id
-    except:
-       user=update.from_user.id
+    user = int(update.data.split("_")[-1])
     if update.from_user.id==user:
        try:
           member = await bot.get_chat_member(FSUB_CHANNEL, user)          
        except UserNotParticipant:
-          await update.answer("Nice Try :(", show_alert=True)
+          await update.answer("I like your smartness..\nBut don't be over smart 🤭", show_alert=True) # @subinps 😁
        except Exception as e:
             print(e)
        else:
@@ -69,4 +67,4 @@ async def check_fsub(bot, update):
     else:
        await update.answer("That's not for you bruh 😂", show_alert=True)
  
-# Kangers stay away 😒
+
