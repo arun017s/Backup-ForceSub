@@ -42,8 +42,8 @@ async def user_bot(user, message):
         except Exception as e:
             print(e) 
       
-@Bot.on_callback_query(filters.regex("checksub"))  
-async def try_again(bot, update):
+@Bot.on_callback_query()  
+async def callback(bot, update):
     try:
        await check_fsub(bot, update)
     except Exception as e:
